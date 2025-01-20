@@ -1,0 +1,40 @@
+name: lady_first_flutter
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  # navigation
+  go_router: ^14.6.3
+  # networking
+  dio: ^5.7.0
+  pretty_dio_logger: ^1.4.0
+  # icons
+  hugeicons: ^0.0.7
+  # carousel
+  carousel_slider: ^5.0.0
+  cached_network_image: ^3.4.1
+  path_provider: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: sfpro
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Regular.otf
+          weight: 400
