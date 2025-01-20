@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
+import 'package:lady_first_flutter/core/constants/app_pages.dart';
+import 'package:lady_first_flutter/core/constants/routes.dart';
 
 AppBar homeAppBar() {
   return AppBar(
@@ -11,6 +13,11 @@ AppBar homeAppBar() {
       onPressed: () {},
     ),
     actions: [
+      IconButton(
+        onPressed: () => AppPages.router.pushNamed(Routes.notification),
+        icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedNotification01, color: AppColor.black),
+      ),
       IconButton(
         onPressed: () {},
         icon: HugeIcon(

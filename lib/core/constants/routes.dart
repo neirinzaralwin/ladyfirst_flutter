@@ -6,4 +6,7 @@ class Routes {
 
   // user
   static const String profile = "profile";
+
+  // notification
+  static const String notification = "notification";
 }

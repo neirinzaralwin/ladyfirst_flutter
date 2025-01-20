@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lady_first_flutter/features/home/home_screen.dart';
+import 'package:lady_first_flutter/features/notification/notification_screen.dart';
 import 'package:lady_first_flutter/features/product/product_detail/product_detail_screen.dart';
 
 import '../../features/user/profile_screen.dart';
@@ -22,6 +23,12 @@ class AppPages {
         path: "/${Routes.productDetail}",
         builder: (BuildContext context, GoRouterState state) =>
             const ProductDetailScreen(),
+      ),
+      GoRoute(
+        name: Routes.notification,
+        path: "/${Routes.notification}",
+        builder: (BuildContext context, GoRouterState state) =>
+            const NotificationScreen(),
       ),
       StatefulShellRoute(
         builder: (BuildContext context, GoRouterState state,
