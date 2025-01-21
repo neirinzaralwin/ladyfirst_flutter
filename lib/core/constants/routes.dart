@@ -4,6 +4,9 @@ class Routes {
   // product
   static const String productDetail = "product-detail";
 
+  // cart
+  static const String cart = "cart";
+
   // user
   static const String profile = "profile";
 
