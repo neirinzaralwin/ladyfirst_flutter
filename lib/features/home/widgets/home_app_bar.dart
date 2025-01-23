@@ -19,7 +19,7 @@ AppBar homeAppBar() {
             icon: HugeIcons.strokeRoundedNotification01, color: AppColor.black),
       ),
       IconButton(
-        onPressed: () {},
+        onPressed: () => AppPages.router.pushNamed(Routes.login),
         icon: HugeIcon(
             icon: HugeIcons.strokeRoundedShoppingBag01, color: AppColor.black),
       ),

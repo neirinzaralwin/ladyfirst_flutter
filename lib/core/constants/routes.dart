@@ -1,6 +1,9 @@
 class Routes {
   static const String home = "home";
 
+  // auth
+  static const String login = "login";
+
   // product
   static const String productDetail = "product-detail";
 
