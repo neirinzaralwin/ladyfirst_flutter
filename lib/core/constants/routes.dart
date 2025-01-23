@@ -7,6 +7,9 @@ class Routes {
   // cart
   static const String cart = "cart";
 
+  // checkout
+  static const String checkout = "checkout";
+
   // user
   static const String profile = "profile";
 
