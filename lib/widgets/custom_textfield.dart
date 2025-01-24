@@ -12,7 +12,7 @@ class CustomTextFormField extends StatefulWidget {
   final Color? cursorColor;
   final bool? enableBorder;
   final String hint;
-  final IconData? prefixIcon;
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
   final double? iconSize;
   final TextEditingController controller;
@@ -91,13 +91,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               labelStyle: TextStyle(color: widget.textColor ?? AppColor.swatch),
               hintStyle: const TextStyle(
                   color: AppColor.grey, fontSize: 12.0), // small
-              prefixIcon: widget.prefixIcon != null
-                  ? Icon(
-                      widget.prefixIcon,
-                      color: widget.iconColor ?? AppColor.swatch,
-                      size: widget.iconSize,
-                    )
-                  : null,
+              prefixIcon: widget.prefixIcon,
               suffixIcon: widget.isPassword
                   ? Container(
                       padding: const EdgeInsets.only(right: 3.0),
@@ -160,13 +154,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               fillColor: widget.fillColor,
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              prefixIcon: widget.prefixIcon != null
-                  ? Icon(
-                      widget.prefixIcon,
-                      color: widget.iconColor ?? AppColor.swatch,
-                      size: 18,
-                    )
-                  : null,
+              prefixIcon: widget.prefixIcon,
               suffixIcon: widget.isPassword
                   ? IconButton(
                       onPressed: () {

@@ -10,7 +10,7 @@ AppBar homeAppBar() {
     leading: IconButton(
       icon: HugeIcon(
           icon: HugeIcons.strokeRoundedSearch01, color: AppColor.black),
-      onPressed: () {},
+      onPressed: () => AppPages.router.pushNamed(Routes.search),
     ),
     actions: [
       IconButton(

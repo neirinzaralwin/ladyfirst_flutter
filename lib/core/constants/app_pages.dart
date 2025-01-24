@@ -7,6 +7,7 @@ import 'package:lady_first_flutter/features/checkout/checkout_screen.dart';
 import 'package:lady_first_flutter/features/home/home_screen.dart';
 import 'package:lady_first_flutter/features/notification/notification_screen.dart';
 import 'package:lady_first_flutter/features/product/product_detail/product_detail_screen.dart';
+import 'package:lady_first_flutter/features/search/search_screen.dart';
 
 import '../../features/user/profile_screen.dart';
 import '../../layout.dart';
@@ -81,6 +82,12 @@ class AppPages {
                 path: "/${Routes.home}",
                 builder: (BuildContext context, GoRouterState state) =>
                     const HomeScreen(),
+              ),
+              GoRoute(
+                name: Routes.search,
+                path: "/${Routes.search}",
+                builder: (BuildContext context, GoRouterState state) =>
+                    const SearchScreen(),
               ),
             ],
           ),

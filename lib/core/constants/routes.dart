@@ -8,6 +8,9 @@ class Routes {
   // product
   static const String productDetail = "product-detail";
 
+  // search
+  static const String search = "search";
+
   // cart
   static const String cart = "cart";
 
