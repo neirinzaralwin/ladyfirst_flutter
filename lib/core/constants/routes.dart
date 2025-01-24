@@ -3,6 +3,7 @@ class Routes {
 
   // auth
   static const String login = "login";
+  static const String register = "register";
 
   // product
   static const String productDetail = "product-detail";

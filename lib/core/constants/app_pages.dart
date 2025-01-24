@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lady_first_flutter/features/auth/login_screen.dart';
+import 'package:lady_first_flutter/features/auth/register_screen.dart';
 import 'package:lady_first_flutter/features/cart/cart_screen.dart';
 import 'package:lady_first_flutter/features/checkout/checkout_screen.dart';
 import 'package:lady_first_flutter/features/home/home_screen.dart';
@@ -50,6 +51,12 @@ class AppPages {
         path: "/${Routes.login}",
         builder: (BuildContext context, GoRouterState state) =>
             const LoginScreen(),
+      ),
+      GoRoute(
+        name: Routes.register,
+        path: "/${Routes.register}",
+        builder: (BuildContext context, GoRouterState state) =>
+            const RegisterScreen(),
       ),
       StatefulShellRoute(
         builder: (BuildContext context, GoRouterState state,

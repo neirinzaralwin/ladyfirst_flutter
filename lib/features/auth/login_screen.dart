@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
 import 'package:lady_first_flutter/core/constants/app_const.dart';
 import 'package:lady_first_flutter/core/constants/app_pages.dart';
+import 'package:lady_first_flutter/core/constants/routes.dart';
 import 'package:lady_first_flutter/core/dimension/screen_dimension.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/core/extensions/text_extensions.dart';
@@ -49,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text("Don't have account?").bodyMedium,
                     const SizedBox(width: 5.0),
                     GestureDetector(
-                      onTap: () => [],
+                      onTap: () => AppPages.router.pushNamed(Routes.register),
                       child: const Text("Sign up").bodyMedium.bold.primaryColor,
                     ),
                   ],
