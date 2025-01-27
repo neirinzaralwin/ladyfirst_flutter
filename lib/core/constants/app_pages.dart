@@ -4,6 +4,7 @@ import 'package:lady_first_flutter/features/auth/login_screen.dart';
 import 'package:lady_first_flutter/features/auth/register_screen.dart';
 import 'package:lady_first_flutter/features/cart/cart_screen.dart';
 import 'package:lady_first_flutter/features/checkout/checkout_screen.dart';
+import 'package:lady_first_flutter/features/checkout/order_place_screen.dart';
 import 'package:lady_first_flutter/features/home/home_screen.dart';
 import 'package:lady_first_flutter/features/notification/notification_screen.dart';
 import 'package:lady_first_flutter/features/product/product_detail/product_detail_screen.dart';
@@ -42,11 +43,18 @@ class AppPages {
             const CartScreen(),
       ),
       GoRoute(
-        name: Routes.checkout,
-        path: "/${Routes.checkout}",
-        builder: (BuildContext context, GoRouterState state) =>
-            const CheckoutScreen(),
-      ),
+          name: Routes.checkout,
+          path: "/${Routes.checkout}",
+          builder: (BuildContext context, GoRouterState state) =>
+              const CheckoutScreen(),
+          routes: [
+            GoRoute(
+              name: Routes.orderPlaced,
+              path: Routes.orderPlaced,
+              builder: (BuildContext context, GoRouterState state) =>
+                  const OrderPlaceScreen(),
+            )
+          ]),
       GoRoute(
         name: Routes.login,
         path: "/${Routes.login}",

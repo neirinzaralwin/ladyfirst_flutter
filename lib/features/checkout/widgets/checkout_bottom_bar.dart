@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lady_first_flutter/core/constants/app_pages.dart';
+import 'package:lady_first_flutter/core/constants/routes.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 
 checkoutBottomBar() {
@@ -22,7 +24,8 @@ checkoutBottomBar() {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () => [],
+                  onPressed: () =>
+                      AppPages.router.pushReplacementNamed(Routes.orderPlaced),
                   child: Text("Proceed"),
                 ),
               ),

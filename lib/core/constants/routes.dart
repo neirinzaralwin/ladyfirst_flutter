@@ -14,6 +14,9 @@ class Routes {
   // cart
   static const String cart = "cart";
 
+  // order placed
+  static const String orderPlaced = "order-placed";
+
   // checkout
   static const String checkout = "checkout";
 
