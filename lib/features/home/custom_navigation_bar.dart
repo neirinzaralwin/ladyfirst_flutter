@@ -37,13 +37,21 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 icon: HugeIcons.strokeRoundedBrowser, color: AppColor.grey),
             label: "Home"),
         BottomNavigationBarItem(
+            tooltip: "Wishlist",
+            activeIcon: HugeIcon(
+                icon: HugeIcons.strokeRoundedFavourite,
+                color: AppColor.primaryColor),
+            icon: HugeIcon(
+                icon: HugeIcons.strokeRoundedFavourite, color: AppColor.grey),
+            label: "Wishlist"),
+        BottomNavigationBarItem(
             tooltip: "User profile",
             activeIcon: HugeIcon(
                 icon: HugeIcons.strokeRoundedUserCircle,
                 color: AppColor.primaryColor),
             icon: HugeIcon(
                 icon: HugeIcons.strokeRoundedUserCircle, color: AppColor.grey),
-            label: "Profile")
+            label: "Profile"),
       ],
       selectedItemColor: AppColor.primaryColor,
     );

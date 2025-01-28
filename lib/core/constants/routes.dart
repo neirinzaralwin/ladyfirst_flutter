@@ -5,6 +5,9 @@ class Routes {
   static const String login = "login";
   static const String register = "register";
 
+  // favourite
+  static const String favorite = "favorite";
+
   // product
   static const String productDetail = "product-detail";
 

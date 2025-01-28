@@ -5,6 +5,7 @@ import 'package:lady_first_flutter/features/auth/register_screen.dart';
 import 'package:lady_first_flutter/features/cart/cart_screen.dart';
 import 'package:lady_first_flutter/features/checkout/checkout_screen.dart';
 import 'package:lady_first_flutter/features/checkout/order_place_screen.dart';
+import 'package:lady_first_flutter/features/favorite/favorite_screen.dart';
 import 'package:lady_first_flutter/features/home/home_screen.dart';
 import 'package:lady_first_flutter/features/notification/notification_screen.dart';
 import 'package:lady_first_flutter/features/product/product_detail/product_detail_screen.dart';
@@ -101,6 +102,18 @@ class AppPages {
           ),
 
           // Branch 1
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                name: Routes.favorite,
+                path: "/${Routes.favorite}",
+                builder: (BuildContext context, GoRouterState state) =>
+                    const FavoriteScreen(),
+              ),
+            ],
+          ),
+
+          // Branch 2
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
