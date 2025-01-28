@@ -6,6 +6,8 @@ import 'package:lady_first_flutter/core/dimension/screen_dimension.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/widgets/image/custom_cached_network_image.dart';
 
+import 'widgets/profile_menu_list.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -79,6 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 _buildProfileContent(),
+                ProfileMenuList(),
               ],
             ),
           ),

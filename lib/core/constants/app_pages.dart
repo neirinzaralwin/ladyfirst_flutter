@@ -68,6 +68,12 @@ class AppPages {
         builder: (BuildContext context, GoRouterState state) =>
             const RegisterScreen(),
       ),
+      GoRoute(
+        name: Routes.favorite,
+        path: "/${Routes.favorite}",
+        builder: (BuildContext context, GoRouterState state) =>
+            const FavoriteScreen(),
+      ),
       StatefulShellRoute(
         builder: (BuildContext context, GoRouterState state,
             StatefulNavigationShell navigationShell) {
@@ -102,18 +108,6 @@ class AppPages {
           ),
 
           // Branch 1
-          StatefulShellBranch(
-            routes: <RouteBase>[
-              GoRoute(
-                name: Routes.favorite,
-                path: "/${Routes.favorite}",
-                builder: (BuildContext context, GoRouterState state) =>
-                    const FavoriteScreen(),
-              ),
-            ],
-          ),
-
-          // Branch 2
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(

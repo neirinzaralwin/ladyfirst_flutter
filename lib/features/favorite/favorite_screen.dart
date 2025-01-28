@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
+import 'package:lady_first_flutter/core/constants/app_pages.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/widgets/image/custom_cached_network_image.dart';
 
@@ -144,19 +146,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Wishlist"),
-        leading: TextButton(
-          onPressed: _products.isNotEmpty ? _toggleSelectAll : null,
-          child: Text(
-            _selectedIndices.length == _products.length
-                ? "Deselect all"
-                : "Select all",
-          ).primaryColor,
-        ),
-        leadingWidth: 100.0,
+        automaticallyImplyLeading: true,
         actions: [
           TextButton(
             onPressed: _products.isNotEmpty ? _clearAll : null,
-            child: const Text("Clear").primaryColor,
+            child: const Text("Remove all").primaryColor.bold,
           ),
         ],
       ),
@@ -166,6 +160,28 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             ? CustomScrollView(
                 key: const ValueKey('has_items'),
                 slivers: [
+                  SliverAppBar(
+                    automaticallyImplyLeading: false,
+                    pinned: true,
+                    leadingWidth: 100.0,
+                    toolbarHeight: 40.0,
+                    leading: TextButton(
+                      onPressed: _products.isNotEmpty ? _toggleSelectAll : null,
+                      child: Text(
+                        _selectedIndices.length == _products.length
+                            ? "Deselect all"
+                            : "Select all",
+                      ).primaryColor.bold,
+                    ),
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          '${_selectedIndices.length} selected',
+                        ).bodyMedium.greyColor,
+                      ),
+                    ],
+                  ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => _buildListItem(context, index),
