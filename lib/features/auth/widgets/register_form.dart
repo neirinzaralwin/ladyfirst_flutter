@@ -14,7 +14,7 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _nameController = TextEditingController();
   final _usernameController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -45,9 +45,9 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             const SizedBox(height: 20.0),
             CustomTextFormField(
-              text: "email".startCapitalize,
-              hint: "johndoe@gmail.com",
-              controller: _emailController,
+              text: "phone".startCapitalize,
+              hint: "+66 123456789",
+              controller: _phoneController,
               validator: checkEmail,
               enabledBorderColor: AppColor.grey,
               focusBorderColor: AppColor.darkGray,

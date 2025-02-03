@@ -12,7 +12,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
@@ -22,9 +22,9 @@ class _LoginFormState extends State<LoginForm> {
         child: Column(
           children: [
             CustomTextFormField(
-              text: "email".startCapitalize,
-              hint: "johndoe@gmail.com",
-              controller: _emailController,
+              text: "phone".startCapitalize,
+              hint: "+66 123456789",
+              controller: _phoneController,
               validator: checkEmail,
               enabledBorderColor: AppColor.grey,
               focusBorderColor: AppColor.darkGray,

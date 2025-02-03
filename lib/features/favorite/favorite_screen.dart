@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
-import 'package:lady_first_flutter/core/constants/app_pages.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/widgets/image/custom_cached_network_image.dart';
 

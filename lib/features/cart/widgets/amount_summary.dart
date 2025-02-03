@@ -9,29 +9,6 @@ class AmountSummary extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 25.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Subtotal').bodyLarge.greyColor.bold,
-            Container(
-                constraints: BoxConstraints(minWidth: 80),
-                child: const Text(
-                  '\$ 100.0',
-                  textAlign: TextAlign.start,
-                ).bodyLarge.bold.greyColor),
-          ],
-        ),
-        SizedBox(height: 15.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Shipping').bodyLarge.greyColor.bold,
-            Container(
-                constraints: BoxConstraints(minWidth: 80),
-                child: const Text('\$ 15.0').bodyLarge.bold.greyColor),
-          ],
-        ),
-        SizedBox(height: 15.0),
         const DashedDivider(),
         SizedBox(height: 15.0),
         Row(
