@@ -27,6 +27,9 @@ dependencies:
   shimmer: ^3.0.0
   # animation
   lottie: ^3.3.1
+  bloc: ^9.0.0
+  flutter_bloc: ^9.0.0
+  # state management
 
 dev_dependencies:
   flutter_test:
