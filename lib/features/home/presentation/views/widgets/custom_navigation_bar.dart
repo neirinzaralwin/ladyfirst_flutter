@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
-import '../../core/constants/app_color.dart';
+import '../../../../../core/constants/app_color.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final StatefulNavigationShell navigationShell;

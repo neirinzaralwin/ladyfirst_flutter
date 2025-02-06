@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lady_first_flutter/features/home/widgets/home_app_bar.dart';
-import '../product/product_grid_view.dart';
-import '../product/product_header_widget.dart';
+import 'package:lady_first_flutter/features/home/presentation/views/widgets/home_app_bar.dart';
+import '../../../product/presentation/views/widgets/product_grid_view.dart';
+import '../../../product/presentation/views/widgets/product_header_widget.dart';
 import 'widgets/home_carousel_widget.dart';
 import 'widgets/home_categories_widget.dart';
 import 'widgets/home_popular_products_widget.dart';

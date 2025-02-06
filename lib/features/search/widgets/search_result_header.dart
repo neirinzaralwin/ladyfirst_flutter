@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
-import 'package:lady_first_flutter/features/product/product_detail/widgets/product_detail_content.dart';
+import 'package:lady_first_flutter/features/product/presentation/views/product_detail/widgets/product_detail_content.dart';
 
 class SearchResultHeader extends StatefulWidget {
   const SearchResultHeader({super.key});

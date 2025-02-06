@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'features/home/custom_navigation_bar.dart';
+import 'features/home/presentation/views/widgets/custom_navigation_bar.dart';
 
 class Layout extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
