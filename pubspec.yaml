@@ -16,8 +16,7 @@ dependencies:
   # navigation
   go_router: ^14.6.3
   # networking
-  dio: ^5.7.0
-  pretty_dio_logger: ^1.4.0
+  http: ^1.3.0
   # icons
   hugeicons: ^0.0.7
   # carousel
@@ -31,6 +30,9 @@ dependencies:
   bloc: ^9.0.0
   flutter_bloc: ^9.0.0
   flutter_svg: ^2.0.17
+  shared_preferences: ^2.5.1
+  equatable: ^2.0.7
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

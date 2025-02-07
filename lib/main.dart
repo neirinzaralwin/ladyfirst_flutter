@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lady_first_flutter/core/constants/app_const.dart';
 import 'package:lady_first_flutter/core/constants/app_theme.dart';
-import 'core/configs/app_configs.dart';
 import 'core/constants/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await appConfig(isProduction: false);
   runApp(const MyApp());
 }
 

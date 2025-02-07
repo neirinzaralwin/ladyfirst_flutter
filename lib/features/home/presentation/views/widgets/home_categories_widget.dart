@@ -24,15 +24,16 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
       child: Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: SizedBox(
-          height: 80,
+          height: 85,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (context, index) {
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                constraints: BoxConstraints(minWidth: 60),
+                width: 80, // Fixed width for all items
+                margin: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -58,6 +59,9 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
                         fontSize: 12,
                         color: AppColor.primaryColor,
                       ),
+                      textAlign: TextAlign.center, // Center align the text
+                      maxLines: 2, // Allow 2 lines for longer category names
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),

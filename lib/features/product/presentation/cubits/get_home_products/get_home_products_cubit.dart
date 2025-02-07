@@ -1,18 +1,28 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:lady_first_flutter/features/product/data/models/product.dart';
+import 'package:lady_first_flutter/features/product/data/repositories/product_repository.dart';
 part 'get_home_products_state.dart';
 
 class GetHomeProductsCubit extends Cubit<GetHomeProductsState> {
+  final ProductRepository _productRepository = ProductRepository();
+
   GetHomeProductsCubit() : super(GetHomeProductsInitial());
 
   Future<void> getProducts() async {
     try {
       emit(GetHomeProductsLoading());
-      await Future.delayed(const Duration(seconds: 2));
-      emit(GetHomeProductsLoaded());
+      final products = await _productRepository.getProducts();
+
+      if (products.isEmpty) {
+        emit(GetHomeProductsEmpty());
+        return;
+      }
+
+      emit(GetHomeProductsLoaded(products));
     } catch (e) {
-      debugPrint("Error in getting products : $e");
-      emit(GetHomeProductsError("Error in getting products"));
+      debugPrint("Failed to fetch products : $e");
+      emit(GetHomeProductsError(e.toString()));
     }
   }
 }
