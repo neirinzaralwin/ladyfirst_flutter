@@ -7,6 +7,7 @@ import 'package:lady_first_flutter/core/constants/routes.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/features/product/presentation/cubits/get_home_products/get_home_products_cubit.dart';
 import 'package:lady_first_flutter/core/extensions/text_extensions.dart';
+import 'package:lady_first_flutter/features/product/presentation/views/widgets/product_loading_grid_view.dart';
 
 class ProductGridView extends StatelessWidget {
   const ProductGridView({super.key});
@@ -16,14 +17,7 @@ class ProductGridView extends StatelessWidget {
     return BlocBuilder<GetHomeProductsCubit, GetHomeProductsState>(
       builder: (context, state) {
         if (state is GetHomeProductsLoading) {
-          return const SliverToBoxAdapter(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.all(20.0),
-                child: CircularProgressIndicator(),
-              ),
-            ),
-          );
+          return const ProductLoadingGridView(childCount: 4);
         }
 
         if (state is GetHomeProductsError) {

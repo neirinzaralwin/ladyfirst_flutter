@@ -12,6 +12,7 @@ class GetHomeProductsCubit extends Cubit<GetHomeProductsState> {
   Future<void> getProducts() async {
     try {
       emit(GetHomeProductsLoading());
+      await Future.delayed(Duration(seconds: 2));
       final products = await _productRepository.getProducts();
 
       if (products.isEmpty) {
