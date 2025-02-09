@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:lady_first_flutter/core/constants/app_const.dart';
-import 'package:lady_first_flutter/core/storage/app_storage.dart';
 
 class BaseClient {
   static String baseUrl = !AppConst.DEBUGGING_MODE
@@ -10,10 +9,8 @@ class BaseClient {
       : (Platform.isAndroid ? AppConst.ANDROID_BASE_URL : AppConst.BASE_URL);
 
   Future<Map<String, String>> _getHeaders() async {
-    String token = AppStorage.getToken;
     return {
       'Content-Type': 'application/json',
-      'Authorization': token.isEmpty ? 'Bearer $token' : '',
     };
   }
 
