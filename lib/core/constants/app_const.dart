@@ -11,7 +11,7 @@ class AppConst {
   // url
   static const API_VERSION = "v1";
   static const ANDROID_BASE_URL = "http://10.0.2.2:3031";
-  static const BASE_URL = "http://localhost:3031";
+  static const BASE_URL = "https://ladyfirst.pythonanywhere.com";
   static const PRODUCTION_URL = "https://productionURL.com";
 
   // stripe

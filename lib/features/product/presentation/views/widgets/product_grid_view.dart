@@ -23,9 +23,22 @@ class ProductGridView extends StatelessWidget {
         if (state is GetHomeProductsError) {
           return SliverToBoxAdapter(
             child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text('Error: ${state.message}'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text('Error: ${state.message}'),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {
+                      context.read<GetHomeProductsCubit>().getProducts();
+                    },
+                    label: const Text('Retry'),
+                    icon: const Icon(Icons.refresh),
+                  ),
+                ],
               ),
             ),
           );

@@ -22,8 +22,6 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
   late AnimationController _glowController;
   late Animation<Color?> _colorAnimation;
   bool _isPulling = false;
-  bool _isRealPull = false;
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -60,10 +58,9 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
   }
 
   void _stopGlowWithFade() async {
-    if (!_isLoading) {
-      setState(() => _isPulling = false);
-      _glowController.stop();
-    }
+    await Future.delayed(const Duration(milliseconds: 800));
+    setState(() => _isPulling = false);
+    _glowController.stop();
   }
 
   @override
@@ -76,23 +73,16 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
-        if (notification is ScrollStartNotification) {
-          _isRealPull = notification.dragDetails != null;
-        } else if (notification is ScrollUpdateNotification) {
-          if (notification.metrics.pixels < 0 && _isRealPull) {
-            if (!_isPulling && _isLoading) {
+        if (notification is ScrollUpdateNotification) {
+          if (notification.metrics.pixels < 0) {
+            if (!_isPulling) {
               setState(() => _isPulling = true);
               _glowController.repeat(reverse: true);
             }
           } else {
-            if (_isPulling && !_isLoading) {
+            if (_isPulling) {
               _stopGlowWithFade();
             }
-          }
-        } else if (notification is ScrollEndNotification) {
-          _isRealPull = false;
-          if (_isPulling && !_isLoading) {
-            _stopGlowWithFade();
           }
         }
         return false;
@@ -100,29 +90,14 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
       child: Stack(
         children: [
           CustomRefreshIndicator(
-            onRefresh: () async {
-              setState(() {
-                _isLoading = true;
-                _isPulling = true;
-              });
-              _glowController.repeat(reverse: true);
-
-              await widget.onRefresh();
-
-              setState(() {
-                _isLoading = false;
-                _isPulling = false;
-              });
-              _glowController.stop();
-            },
+            onRefresh: widget.onRefresh,
             trigger: IndicatorTrigger.leadingEdge,
-            child: widget.child,
-            offsetToArmed: 40.0,
+            offsetToArmed: 30.0,
             builder: (context, child, controller) {
               return Stack(
                 children: [
                   Transform.translate(
-                    offset: Offset(0.0, controller.value * 40.0),
+                    offset: Offset(0.0, controller.value * 35.0),
                     child: child,
                   ),
                   if (controller.value > 0)
@@ -154,7 +129,7 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
                         ),
                       ),
                     ),
-                  if (_isPulling && _isLoading)
+                  if (_isPulling)
                     Positioned(
                       top: 0,
                       left: 0,
@@ -181,6 +156,7 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
                 ],
               );
             },
+            child: widget.child,
           ),
         ],
       ),
