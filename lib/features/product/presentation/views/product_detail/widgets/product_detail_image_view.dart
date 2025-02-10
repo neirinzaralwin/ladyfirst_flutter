@@ -66,7 +66,7 @@ class _ProductDetailImageViewState extends State<ProductDetailImageView> {
           );
         }
 
-        if (state is GetProductLoaded) return _buildLoadingWidget(screenWidth);
+        if (state is GetProductLoading) return _buildLoadingWidget(screenWidth);
 
         if (state is GetProductError) {
           return _buildErrorWidget(state.message, screenWidth);
