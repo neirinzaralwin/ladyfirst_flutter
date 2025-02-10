@@ -15,4 +15,15 @@ class ProductService {
       throw Exception('Failed to fetch products: $e');
     }
   }
+
+  Future<Product> fetchProduct({required int productId}) async {
+    try {
+      final apiRoute = '${ApiConst.getProducts}/$productId';
+      final response = await _client.get(apiRoute);
+      final decodedJson = json.decode(response.body);
+      return Product.fromJson(decodedJson);
+    } catch (e) {
+      throw Exception('Failed to fetch product: $e');
+    }
+  }
 }

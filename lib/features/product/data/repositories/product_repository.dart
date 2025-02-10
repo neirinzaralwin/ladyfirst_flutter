@@ -5,10 +5,10 @@ class ProductRepository {
   final ProductService _productService = ProductService();
 
   Future<List<Product>> getProducts() async {
-    try {
-      return await _productService.fetchProducts();
-    } catch (e) {
-      throw Exception('Repository Error: Failed to get products - $e');
-    }
+    return await _productService.fetchProducts();
+  }
+
+  Future<Product> getProduct({required int productId}) async {
+    return await _productService.fetchProduct(productId: productId);
   }
 }
