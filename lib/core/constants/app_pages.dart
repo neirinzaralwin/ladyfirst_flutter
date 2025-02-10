@@ -27,9 +27,11 @@ class AppPages {
     routes: <RouteBase>[
       GoRoute(
         name: Routes.productDetail,
-        path: "/${Routes.productDetail}",
-        builder: (BuildContext context, GoRouterState state) =>
-            const ProductDetailScreen(),
+        path: "/${Routes.productDetail}/:productId",
+        builder: (BuildContext context, GoRouterState state) {
+          final String productId = state.pathParameters['productId']!;
+          return ProductDetailScreen(productId: int.parse(productId));
+        },
       ),
       GoRoute(
         name: Routes.notification,

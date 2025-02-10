@@ -71,8 +71,12 @@ class ProductGridView extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                      onTap: () =>
-                          AppPages.router.pushNamed(Routes.productDetail),
+                      onTap: () => AppPages.router.pushNamed(
+                        Routes.productDetail,
+                        pathParameters: {
+                          'productId': product.id.toString(),
+                        },
+                      ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: Container(
