@@ -15,7 +15,6 @@ class GetProductCubit extends Cubit<GetProductState> {
   Future<void> getProduct() async {
     try {
       emit(GetProductLoading());
-      await Future.delayed(const Duration(seconds: 5));
       final products =
           await _productRepository.getProduct(productId: productId);
       emit(GetProductLoaded(products));
