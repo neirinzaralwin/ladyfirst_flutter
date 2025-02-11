@@ -19,6 +19,10 @@ extension TextExtensions on Text {
     // Remove currency symbol and spaces before parsing
     final cleanString = data?.replaceAll(RegExp(r'[^\d.]'), '') ?? '0';
     final number = double.tryParse(cleanString) ?? 0;
-    return Text('\$${formatter.format(number)}');
+    final formattedNumber = formatter.format(number);
+    final result = formattedNumber.endsWith('.00')
+        ? formattedNumber.substring(0, formattedNumber.length - 3)
+        : formattedNumber;
+    return Text('\$$result');
   }
 }

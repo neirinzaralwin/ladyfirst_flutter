@@ -14,7 +14,6 @@ class GetHomeProductsCubit extends Cubit<GetHomeProductsState> {
     try {
       emit(GetHomeProductsLoading());
       final products = await _productRepository.getProducts();
-
       if (products.isEmpty) {
         emit(GetHomeProductsEmpty());
         return;

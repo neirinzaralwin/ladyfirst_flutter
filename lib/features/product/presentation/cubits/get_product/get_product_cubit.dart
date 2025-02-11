@@ -23,4 +23,12 @@ class GetProductCubit extends Cubit<GetProductState> {
       emit(GetProductError(e.toString()));
     }
   }
+
+  Future<void> refreshProduct() async {
+    try {
+      await getProduct();
+    } catch (e) {
+      emit(GetProductError(e.toString()));
+    }
+  }
 }

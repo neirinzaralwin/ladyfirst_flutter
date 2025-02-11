@@ -2,34 +2,34 @@ import 'package:equatable/equatable.dart';
 
 class Product extends Equatable {
   const Product({
-    this.id,
-    this.title,
-    this.description,
-    this.price,
-    this.originalPrice,
-    this.secondHandPrice,
-    this.category,
-    this.condition,
-    this.size,
-    this.authenticityDocument,
-    this.image,
-    this.createdAt,
-    this.seller,
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.originalPrice,
+    required this.secondHandPrice,
+    required this.category,
+    required this.condition,
+    required this.size,
+    required this.authenticityDocument,
+    required this.image,
+    required this.createdAt,
+    required this.seller,
   });
 
-  final int? id;
-  final String? title;
-  final String? description;
-  final String? price;
-  final String? originalPrice;
-  final String? secondHandPrice;
-  final String? category;
-  final String? condition;
-  final String? size;
-  final String? authenticityDocument;
-  final String? image;
-  final String? createdAt;
-  final num? seller;
+  final int id;
+  final String title;
+  final String description;
+  final String price;
+  final String originalPrice;
+  final String secondHandPrice;
+  final String category;
+  final String condition;
+  final String size;
+  final String authenticityDocument;
+  final String image;
+  final String createdAt;
+  final num seller;
 
   Product copyWith({
     int? id,
@@ -66,14 +66,14 @@ class Product extends Equatable {
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json["id"] ?? 0,
-      title: json["title"] ?? "",
-      description: json["description"] ?? "",
-      price: json["price"] ?? "",
-      originalPrice: json["original_price"] ?? "",
-      secondHandPrice: json["second_hand_price"] ?? "",
-      category: json["category"] ?? "",
-      condition: json["condition"] ?? "",
-      size: json["size"] ?? "",
+      title: json["title"] ?? "Untitled",
+      description: json["description"] ?? "No description",
+      price: json["price"] ?? "0",
+      originalPrice: json["original_price"] ?? "0",
+      secondHandPrice: json["second_hand_price"] ?? "0",
+      category: json["category"] ?? "None",
+      condition: json["condition"] ?? "Unknown",
+      size: json["size"] ?? "N/A",
       authenticityDocument: json["authenticity_document"] ?? "",
       image: json["image"] ?? "",
       createdAt: json["created_at"] ?? "",
