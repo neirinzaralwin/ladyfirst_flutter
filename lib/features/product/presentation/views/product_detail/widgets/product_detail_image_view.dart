@@ -23,7 +23,7 @@ class _ProductDetailImageViewState extends State<ProductDetailImageView> {
     return BlocBuilder<GetProductCubit, GetProductState>(
       builder: (context, state) {
         if (state is GetProductLoaded) {
-          final image = state.product.image ?? "";
+          final image = state.product.image;
 
           return Stack(
             children: [

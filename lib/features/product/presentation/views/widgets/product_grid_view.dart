@@ -96,8 +96,7 @@ class ProductGridView extends StatelessWidget {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image:
-                                              NetworkImage(product.image ?? ''),
+                                          image: NetworkImage(product.image),
                                           fit: BoxFit.cover,
                                         ),
                                         borderRadius: const BorderRadius.only(
@@ -114,14 +113,12 @@ class ProductGridView extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(product.title ?? '')
-                                            .bodyMedium
-                                            .bold,
-                                        Text(product.condition ?? '')
+                                        Text(product.title).bodyMedium.bold,
+                                        Text(product.condition)
                                             .bodySmall
                                             .greyColor,
                                         const SizedBox(height: 2.0),
-                                        Text(product.price ?? '0')
+                                        Text(product.price)
                                             .currencyFormat
                                             .bodyMedium
                                             .orangeColor
