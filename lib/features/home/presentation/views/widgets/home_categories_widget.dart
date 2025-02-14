@@ -18,7 +18,7 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
           height: 85,
           child: BlocBuilder<GetCategoriesCubit, GetCategoriesState>(
