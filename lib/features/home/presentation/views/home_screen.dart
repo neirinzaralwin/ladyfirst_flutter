@@ -9,6 +9,7 @@ import 'widgets/home_carousel_widget.dart';
 import 'widgets/home_categories_widget.dart';
 import 'widgets/home_popular_products_widget.dart';
 import 'widgets/inspiring_refresh_indicator.dart';
+import 'package:lady_first_flutter/features/category/presentation/cubits/get_categories/get_categories_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,24 +20,40 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late GetHomeProductsCubit _getHomeProductsCubit;
+  late GetCategoriesCubit _getCategoriesCubit;
 
   @override
   void initState() {
     super.initState();
     _getHomeProductsCubit = GetHomeProductsCubit();
-    _getHomeProductsCubit.getProducts();
+    _getCategoriesCubit = GetCategoriesCubit();
+
+    Future.wait([
+      _getHomeProductsCubit.getProducts(),
+      _getCategoriesCubit.getCategories(),
+    ]);
   }
 
   Future<void> _handleRefresh() async {
     // Light haptic feedback
     await HapticFeedback.lightImpact();
-    await _getHomeProductsCubit.refreshProducts();
+    await Future.wait([
+      _getHomeProductsCubit.refreshProducts(),
+      _getCategoriesCubit.getCategories(),
+    ]);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _getHomeProductsCubit,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: _getHomeProductsCubit,
+        ),
+        BlocProvider.value(
+          value: _getCategoriesCubit,
+        ),
+      ],
       child: Scaffold(
         appBar: homeAppBar(),
         body: InspiringRefreshIndicator(
@@ -64,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _getHomeProductsCubit.close();
+    _getCategoriesCubit.close();
     super.dispose();
   }
 }

@@ -9,11 +9,11 @@ class GetCategoriesCubit extends Cubit<GetCategoriesState> {
   GetCategoriesCubit() : super(GetCategoriesInitial());
 
   final _categoryRepository = CategoryRepository();
-  late int productId;
 
-  Future<void> getProduct() async {
+  Future<void> getCategories() async {
     try {
       emit(GetCategoriesLoading());
+      await Future.delayed(const Duration(seconds: 1));
       final categories = await _categoryRepository.getCategories();
       emit(GetCategoriesLoaded(categories));
     } catch (e) {
