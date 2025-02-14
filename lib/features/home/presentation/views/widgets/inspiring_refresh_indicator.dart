@@ -116,7 +116,6 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
               _glowController.stop();
             },
             trigger: IndicatorTrigger.leadingEdge,
-            child: widget.child,
             offsetToArmed: 40.0,
             builder: (context, child, controller) {
               return Stack(
@@ -181,6 +180,7 @@ class _InspiringRefreshIndicatorState extends State<InspiringRefreshIndicator>
                 ],
               );
             },
+            child: widget.child,
           ),
         ],
       ),
