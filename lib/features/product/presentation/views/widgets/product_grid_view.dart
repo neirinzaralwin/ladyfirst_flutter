@@ -118,7 +118,7 @@ class ProductGridView extends StatelessWidget {
                                             .bodySmall
                                             .greyColor,
                                         const SizedBox(height: 2.0),
-                                        Text(product.price)
+                                        Text(product.secondHandPrice)
                                             .currencyFormat
                                             .bodyMedium
                                             .orangeColor
