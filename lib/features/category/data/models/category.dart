@@ -5,21 +5,25 @@ class Category extends Equatable {
     required this.id,
     required this.title,
     required this.categorySlug,
+    required this.url,
   });
 
   final int id;
   final String title;
   final String categorySlug;
+  final String url;
 
   Category copyWith({
     int? id,
     String? title,
     String? categorySlug,
+    String? url,
   }) {
     return Category(
       id: id ?? this.id,
       title: title ?? this.title,
       categorySlug: categorySlug ?? this.categorySlug,
+      url: url ?? this.url,
     );
   }
 
@@ -28,6 +32,7 @@ class Category extends Equatable {
       id: json["id"] ?? 0,
       title: json["title"] ?? "",
       categorySlug: json["category_slug"] ?? "",
+      url: json["url"] ?? "",
     );
   }
 
@@ -35,11 +40,12 @@ class Category extends Equatable {
         "id": id,
         "title": title,
         "category_slug": categorySlug,
+        "url": url,
       };
 
   @override
   String toString() {
-    return "$id, $title, $categorySlug, ";
+    return "$id, $title, $categorySlug, $url";
   }
 
   @override
@@ -47,6 +53,7 @@ class Category extends Equatable {
         id,
         title,
         categorySlug,
+        url,
       ];
 }
 
@@ -55,4 +62,5 @@ class Category extends Equatable {
 	"id": 1,
 	"title": "shirt",
 	"category_slug": "shirt"
+  "url": "https://www.example.com/shirt"  
 }*/
