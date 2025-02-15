@@ -32,8 +32,11 @@ dependencies:
   flutter_svg: ^2.0.17
   shared_preferences: ^2.5.1
   equatable: ^2.0.7
+  # translation and localization
   intl: ^0.20.2
   custom_refresh_indicator: ^4.0.1
+  # rename
+  rename_app: ^1.6.2
 
 dev_dependencies:
   flutter_test:

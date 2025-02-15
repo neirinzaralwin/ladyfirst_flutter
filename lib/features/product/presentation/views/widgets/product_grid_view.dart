@@ -8,6 +8,8 @@ import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/features/product/presentation/cubits/get_home_products/get_home_products_cubit.dart';
 import 'package:lady_first_flutter/core/extensions/text_extensions.dart';
 import 'package:lady_first_flutter/features/product/presentation/views/widgets/product_loading_grid_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductGridView extends StatelessWidget {
   const ProductGridView({super.key});
@@ -96,7 +98,8 @@ class ProductGridView extends StatelessWidget {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: NetworkImage(product.image),
+                                          image: CachedNetworkImageProvider(
+                                              product.image),
                                           fit: BoxFit.cover,
                                         ),
                                         borderRadius: const BorderRadius.only(
