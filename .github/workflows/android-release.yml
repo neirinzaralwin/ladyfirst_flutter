@@ -58,4 +58,4 @@ jobs:
 
             You can download the APK from the assets below.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
