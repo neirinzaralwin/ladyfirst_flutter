@@ -1,0 +1,60 @@
+name: Android Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.27.x"
+          channel: "stable"
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: flutter-deps-${{ runner.os }}-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            flutter-deps-${{ runner.os }}-
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_ENV
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/app/outputs/flutter-apk/app-release.apk
+          tag_name: v1.0.${{ github.run_number }}
+          name: Release v1.0.${{ github.run_number }}
+          body: |
+            🚀 New Release v1.0.${{ github.run_number }}
+
+            Changes in this version:
+            - Automated release from main branch
+            - Build date: ${{ env.date }}
+
+            You can download the APK from the assets below.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
