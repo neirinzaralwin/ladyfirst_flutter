@@ -9,7 +9,6 @@ import 'package:lady_first_flutter/features/product/presentation/cubits/get_home
 import 'package:lady_first_flutter/core/extensions/text_extensions.dart';
 import 'package:lady_first_flutter/features/product/presentation/views/widgets/product_loading_grid_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ProductGridView extends StatelessWidget {
   const ProductGridView({super.key});
