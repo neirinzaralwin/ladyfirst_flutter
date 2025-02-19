@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lady_first_flutter/features/category/presentation/controllers/category_controller.dart';
 import 'package:lady_first_flutter/features/home/presentation/views/widgets/home_app_bar.dart';
 import 'package:lady_first_flutter/features/product/presentation/controllers/product_controller.dart';
 import '../../../product/presentation/views/widgets/product_grid_view.dart';
@@ -9,7 +9,6 @@ import 'widgets/home_carousel_widget.dart';
 import 'widgets/home_categories_widget.dart';
 import 'widgets/home_popular_products_widget.dart';
 import 'widgets/inspiring_refresh_indicator.dart';
-import 'package:lady_first_flutter/features/category/presentation/cubits/get_categories/get_categories_cubit.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,17 +19,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late GetCategoriesCubit _getCategoriesCubit;
+  final _categoryController = Get.find<CategoryController>();
   final _productController = Get.find<ProductController>();
 
   @override
   void initState() {
     super.initState();
-    _getCategoriesCubit = GetCategoriesCubit();
-
     Future.wait([
       _productController.getProducts(),
-      _getCategoriesCubit.getCategories(),
+      _categoryController.getCategories(),
     ]);
   }
 
@@ -38,37 +35,31 @@ class _HomeScreenState extends State<HomeScreen> {
     // Light haptic feedback
     await HapticFeedback.lightImpact();
     await Future.wait([
-      _getCategoriesCubit.getCategories(),
+      _productController.getProducts(),
+      _categoryController.getCategories(),
     ]);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(
-          value: _getCategoriesCubit,
-        ),
-      ],
-      child: Scaffold(
-        appBar: homeAppBar(),
-        body: InspiringRefreshIndicator(
-          onRefresh: _handleRefresh,
-          child: CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics(),
-            ),
-            slivers: [
-              HomeCarouselWidget(),
-              HomeCategoriesWidget(),
-              HomePopularProductsWidget(),
-              SliverToBoxAdapter(
-                child: SizedBox(height: 15.0),
-              ),
-              ProductHeaderWidget(),
-              ProductGridView(),
-            ],
+    return Scaffold(
+      appBar: homeAppBar(),
+      body: InspiringRefreshIndicator(
+        onRefresh: _handleRefresh,
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
           ),
+          slivers: [
+            HomeCarouselWidget(),
+            HomeCategoriesWidget(),
+            HomePopularProductsWidget(),
+            SliverToBoxAdapter(
+              child: SizedBox(height: 15.0),
+            ),
+            ProductHeaderWidget(),
+            ProductGridView(),
+          ],
         ),
       ),
     );
@@ -76,7 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _getCategoriesCubit.close();
     super.dispose();
   }
 }

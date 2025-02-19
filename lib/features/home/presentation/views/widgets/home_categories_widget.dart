@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lady_first_flutter/features/category/data/models/category.dart';
-import 'package:lady_first_flutter/features/category/presentation/cubits/get_categories/get_categories_cubit.dart';
+import 'package:lady_first_flutter/features/category/presentation/controllers/category_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
-class HomeCategoriesWidget extends StatefulWidget {
+class HomeCategoriesWidget extends StatelessWidget {
   const HomeCategoriesWidget({super.key});
 
   @override
-  State<HomeCategoriesWidget> createState() => _HomeCategoriesWidgetState();
-}
-
-class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
-  @override
   Widget build(BuildContext context) {
+    final categoryController = Get.find<CategoryController>();
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
           height: 85,
-          child: BlocBuilder<GetCategoriesCubit, GetCategoriesState>(
-            builder: (context, state) {
-              return switch (state) {
-                GetCategoriesLoading() => _buildCategoriesLoading(),
-                GetCategoriesLoaded() => _buildCategoriesLoaded(state),
-                GetCategoriesError() => _buildCategoriesError(state),
-                _ => const SizedBox.shrink(),
-              };
-            },
-          ),
+          child: Obx(() {
+            final state = categoryController.getCategoriesState.value;
+            if (state is GetCategoriesLoadingState) {
+              return _buildCategoriesLoading();
+            } else if (state is GetCategoriesSuccessState) {
+              return _buildCategoriesLoaded(categoryController.categories);
+            } else if (state is GetCategoriesErrorState) {
+              return _buildCategoriesError(state.error.toString());
+            }
+            return const SizedBox.shrink();
+          }),
         ),
       ),
     );
   }
 
-  Widget _buildCategoriesLoaded(GetCategoriesLoaded state) {
-    List<Category> categories = state.categories;
-
+  Widget _buildCategoriesLoaded(List<Category> categories) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: categories.length,
@@ -84,11 +80,9 @@ class _HomeCategoriesWidgetState extends State<HomeCategoriesWidget> {
     );
   }
 
-  Widget _buildCategoriesError(GetCategoriesError state) {
+  Widget _buildCategoriesError(String message) {
     return Center(
-      child: Text(
-        state.message,
-      ),
+      child: Text(message),
     );
   }
 

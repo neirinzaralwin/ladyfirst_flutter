@@ -3,12 +3,12 @@ import 'package:lady_first_flutter/core/network/api_client.dart';
 import 'package:lady_first_flutter/features/product/data/models/product.dart';
 
 class ProductRepository {
-  final ApiClient? apiClient;
-  ProductRepository({this.apiClient});
+  final ApiClient apiClient;
+  ProductRepository({required this.apiClient});
 
   Future<List<Product>> getProducts() async {
     final response =
-        await apiClient!.getData(ApiConst.getProducts).onError((error, stack) {
+        await apiClient.getData(ApiConst.getProducts).onError((error, stack) {
       throw Exception('Failed to fetch products: $error');
     });
     if (response.statusCode == 200) {
@@ -21,7 +21,7 @@ class ProductRepository {
   }
 
   Future<Product> getProduct({required int productId}) async {
-    final response = await apiClient!
+    final response = await apiClient
         .getData('${ApiConst.getProducts}/$productId')
         .onError((error, stack) {
       throw Exception('Failed to fetch product: $error');
