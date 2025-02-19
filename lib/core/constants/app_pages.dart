@@ -16,6 +16,33 @@ import '../../layout.dart';
 import '../dimension/screen_dimension.dart';
 import 'routes.dart';
 
+// Add this custom transition builder
+class FadeForwardTransitionPage<T> extends CustomTransitionPage<T> {
+  FadeForwardTransitionPage({
+    required LocalKey key,
+    required Widget child,
+  }) : super(
+          key: key,
+          child: child,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOut;
+            var tween = Tween(begin: begin, end: end).chain(
+              CurveTween(curve: curve),
+            );
+            var offsetAnimation = animation.drive(tween);
+            return SlideTransition(
+              position: offsetAnimation,
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+            );
+          },
+        );
+}
+
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 
@@ -28,53 +55,70 @@ class AppPages {
       GoRoute(
         name: Routes.productDetail,
         path: "/${Routes.productDetail}/:productId",
-        builder: (BuildContext context, GoRouterState state) {
+        pageBuilder: (context, state) {
           final String productId = state.pathParameters['productId']!;
-          return ProductDetailScreen(productId: int.parse(productId));
+          return FadeForwardTransitionPage(
+            key: state.pageKey,
+            child: ProductDetailScreen(productId: int.parse(productId)),
+          );
         },
       ),
       GoRoute(
         name: Routes.notification,
         path: "/${Routes.notification}",
-        builder: (BuildContext context, GoRouterState state) =>
-            const NotificationScreen(),
+        pageBuilder: (context, state) => FadeForwardTransitionPage(
+          key: state.pageKey,
+          child: const NotificationScreen(),
+        ),
       ),
       GoRoute(
         name: Routes.cart,
         path: "/${Routes.cart}",
-        builder: (BuildContext context, GoRouterState state) =>
-            const CartScreen(),
+        pageBuilder: (context, state) => FadeForwardTransitionPage(
+          key: state.pageKey,
+          child: const CartScreen(),
+        ),
       ),
       GoRoute(
           name: Routes.checkout,
           path: "/${Routes.checkout}",
-          builder: (BuildContext context, GoRouterState state) =>
-              const CheckoutScreen(),
+          pageBuilder: (context, state) => FadeForwardTransitionPage(
+                key: state.pageKey,
+                child: const CheckoutScreen(),
+              ),
           routes: [
             GoRoute(
               name: Routes.orderPlaced,
               path: Routes.orderPlaced,
-              builder: (BuildContext context, GoRouterState state) =>
-                  const OrderPlaceScreen(),
+              pageBuilder: (context, state) => FadeForwardTransitionPage(
+                key: state.pageKey,
+                child: const OrderPlaceScreen(),
+              ),
             )
           ]),
       GoRoute(
         name: Routes.login,
         path: "/${Routes.login}",
-        builder: (BuildContext context, GoRouterState state) =>
-            const LoginScreen(),
+        pageBuilder: (context, state) => FadeForwardTransitionPage(
+          key: state.pageKey,
+          child: const LoginScreen(),
+        ),
       ),
       GoRoute(
         name: Routes.register,
         path: "/${Routes.register}",
-        builder: (BuildContext context, GoRouterState state) =>
-            const RegisterScreen(),
+        pageBuilder: (context, state) => FadeForwardTransitionPage(
+          key: state.pageKey,
+          child: const RegisterScreen(),
+        ),
       ),
       GoRoute(
         name: Routes.favorite,
         path: "/${Routes.favorite}",
-        builder: (BuildContext context, GoRouterState state) =>
-            const FavoriteScreen(),
+        pageBuilder: (context, state) => FadeForwardTransitionPage(
+          key: state.pageKey,
+          child: const FavoriteScreen(),
+        ),
       ),
       StatefulShellRoute(
         builder: (BuildContext context, GoRouterState state,
@@ -97,14 +141,18 @@ class AppPages {
               GoRoute(
                 name: Routes.home,
                 path: "/${Routes.home}",
-                builder: (BuildContext context, GoRouterState state) =>
-                    const HomeScreen(),
+                pageBuilder: (context, state) => FadeForwardTransitionPage(
+                  key: state.pageKey,
+                  child: const HomeScreen(),
+                ),
               ),
               GoRoute(
                 name: Routes.search,
                 path: "/${Routes.search}",
-                builder: (BuildContext context, GoRouterState state) =>
-                    const SearchScreen(),
+                pageBuilder: (context, state) => FadeForwardTransitionPage(
+                  key: state.pageKey,
+                  child: const SearchScreen(),
+                ),
               ),
             ],
           ),
@@ -115,8 +163,10 @@ class AppPages {
               GoRoute(
                 name: Routes.profile,
                 path: "/${Routes.profile}",
-                builder: (BuildContext context, GoRouterState state) =>
-                    const ProfileScreen(),
+                pageBuilder: (context, state) => FadeForwardTransitionPage(
+                  key: state.pageKey,
+                  child: const ProfileScreen(),
+                ),
               ),
             ],
           ),
