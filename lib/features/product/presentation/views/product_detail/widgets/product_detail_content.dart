@@ -1,41 +1,43 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/core/extensions/string_extensions.dart';
-import 'package:lady_first_flutter/features/product/presentation/cubits/get_product/get_product_cubit.dart';
+import 'package:lady_first_flutter/features/product/data/models/product.dart';
+import 'package:lady_first_flutter/features/product/presentation/controllers/product_controller.dart';
 import 'package:lady_first_flutter/widgets/shimmer/shimmer_widget.dart';
 import 'package:lady_first_flutter/widgets/text/expandable_text.dart';
 
-class ProductDetailContent extends StatelessWidget {
+class ProductDetailContent extends GetView<ProductController> {
   const ProductDetailContent({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: BlocBuilder<GetProductCubit, GetProductState>(
-          builder: (context, state) {
-            return switch (state) {
-              GetProductLoading() => const ProductDetailLoadingContent(),
-              GetProductLoaded() => ProductDetailLoadedContent(state: state),
-              GetProductError() => ProductDetailErrorContent(state: state),
-              _ => const SizedBox.shrink(),
-            };
-          },
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Obx(() {
+        final state = controller.getCurrentProductState.value;
+        return switch (state) {
+          GetCurrentProductLoadingState() =>
+            const ProductDetailLoadingContent(),
+          GetCurrentProductSuccessState() =>
+            ProductDetailLoadedContent(product: controller.currentProduct),
+          GetCurrentProductErrorState() =>
+            ProductDetailErrorContent(error: (state.error)),
+          _ => const SizedBox.shrink(),
+        };
+      }),
+    );
   }
 }
 
 class ProductDetailLoadedContent extends StatelessWidget {
-  final GetProductLoaded state;
-  const ProductDetailLoadedContent({super.key, required this.state});
+  final Product product;
+  const ProductDetailLoadedContent({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    final product = state.product;
-
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,8 +218,8 @@ class ProductDetailLoadingContent extends StatelessWidget {
 }
 
 class ProductDetailErrorContent extends StatelessWidget {
-  final GetProductError state;
-  const ProductDetailErrorContent({super.key, required this.state});
+  final Object error;
+  const ProductDetailErrorContent({super.key, required this.error});
 
   @override
   Widget build(BuildContext context) {
@@ -229,11 +231,11 @@ class ProductDetailErrorContent extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Text('Error: ${state.message}'),
+            child: Text('Error: ${error.toString()}'),
           ),
           TextButton.icon(
             onPressed: () {
-              context.read<GetProductCubit>().getProduct();
+              Get.find<ProductController>().getProduct();
             },
             label: const Text('Retry'),
             icon: const Icon(Icons.refresh),

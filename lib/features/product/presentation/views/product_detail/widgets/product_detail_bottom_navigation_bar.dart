@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:lady_first_flutter/core/constants/app_pages.dart';
 import 'package:lady_first_flutter/core/constants/routes.dart';
-import 'package:lady_first_flutter/features/product/presentation/cubits/get_product/get_product_cubit.dart';
+import 'package:lady_first_flutter/features/product/presentation/controllers/product_controller.dart';
 
-productDetailBottomNavigationBar() {
+Widget productDetailBottomNavigationBar(ProductController controller) {
   return BottomAppBar(
-    child: BlocBuilder<GetProductCubit, GetProductState>(
-      builder: (context, state) => SizedBox(
+    child: Obx(
+      () => SizedBox(
         height: 50,
         child: Row(
           children: [
             Expanded(
               child: ElevatedButton(
-                onPressed: state is! GetProductLoaded
-                    ? null
-                    : () => AppPages.router.pushNamed(Routes.cart),
-                child: Text("Add to Cart"),
+                onPressed: controller.getCurrentProductState.value
+                        is GetCurrentProductSuccessState
+                    ? () => AppPages.router.pushNamed(Routes.cart)
+                    : null,
+                child: const Text("Add to Cart"),
               ),
             ),
           ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lady_first_flutter/features/product/presentation/cubits/get_product/get_product_cubit.dart';
+import 'package:get/get.dart';
+import 'package:lady_first_flutter/features/product/presentation/controllers/product_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'widgets/product_detail_app_bar.dart';
 import 'widgets/product_detail_bottom_navigation_bar.dart';
@@ -17,66 +17,61 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  late GetProductCubit _getProductCubit;
+  final _productController = Get.find<ProductController>();
 
   @override
   void initState() {
     super.initState();
-    _getProductCubit = GetProductCubit();
-    _getProductCubit.productId = widget.productId;
-    _getProductCubit.getProduct();
+    _productController.currentProductId = widget.productId;
+    _productController.getProduct();
   }
 
   Future<void> _handleRefresh() async {
     await HapticFeedback.lightImpact();
-    await _getProductCubit.refreshProduct();
+    await _productController.getProduct();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => _getProductCubit,
-      child: BlocBuilder<GetProductCubit, GetProductState>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: productDetailAppBar(),
-            bottomNavigationBar: productDetailBottomNavigationBar(),
-            body: CustomScrollView(
-              physics: (state is GetProductLoading)
-                  ? NeverScrollableScrollPhysics()
-                  : null,
-              slivers: [
-                CupertinoSliverRefreshControl(
-                  onRefresh: _handleRefresh,
-                  builder: (
-                    BuildContext context,
-                    RefreshIndicatorMode mode,
-                    double pulledExtent,
-                    double refreshTriggerPullDistance,
-                    double refreshIndicatorExtent,
-                  ) {
-                    return Center(
-                      child: SizedBox(
-                        height: 16.0,
-                        width: 16.0,
-                        child: const CupertinoActivityIndicator(),
-                      ),
-                    );
-                  },
-                ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      ProductDetailImageView(),
-                      ProductDetailContent(),
-                    ],
+    return Scaffold(
+      appBar: productDetailAppBar(),
+      bottomNavigationBar: productDetailBottomNavigationBar(_productController),
+      body: Obx(() {
+        return CustomScrollView(
+          physics: (_productController.getCurrentProductState.value
+                  is GetCurrentProductLoadingState)
+              ? const NeverScrollableScrollPhysics()
+              : null,
+          slivers: [
+            CupertinoSliverRefreshControl(
+              onRefresh: _handleRefresh,
+              builder: (
+                BuildContext context,
+                RefreshIndicatorMode mode,
+                double pulledExtent,
+                double refreshTriggerPullDistance,
+                double refreshIndicatorExtent,
+              ) {
+                return const Center(
+                  child: SizedBox(
+                    height: 16.0,
+                    width: 16.0,
+                    child: CupertinoActivityIndicator(),
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          );
-        },
-      ),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  ProductDetailImageView(),
+                  ProductDetailContent(),
+                ],
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

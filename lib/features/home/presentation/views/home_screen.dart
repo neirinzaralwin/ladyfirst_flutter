@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lady_first_flutter/features/home/presentation/views/widgets/home_app_bar.dart';
-import 'package:lady_first_flutter/features/product/presentation/cubits/get_home_products/get_home_products_cubit.dart';
+import 'package:lady_first_flutter/features/product/presentation/controllers/product_controller.dart';
 import '../../../product/presentation/views/widgets/product_grid_view.dart';
 import '../../../product/presentation/views/widgets/product_header_widget.dart';
 import 'widgets/home_carousel_widget.dart';
@@ -10,6 +10,7 @@ import 'widgets/home_categories_widget.dart';
 import 'widgets/home_popular_products_widget.dart';
 import 'widgets/inspiring_refresh_indicator.dart';
 import 'package:lady_first_flutter/features/category/presentation/cubits/get_categories/get_categories_cubit.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,17 +20,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late GetHomeProductsCubit _getHomeProductsCubit;
   late GetCategoriesCubit _getCategoriesCubit;
+  final _productController = Get.find<ProductController>();
 
   @override
   void initState() {
     super.initState();
-    _getHomeProductsCubit = GetHomeProductsCubit();
     _getCategoriesCubit = GetCategoriesCubit();
 
     Future.wait([
-      _getHomeProductsCubit.getProducts(),
+      _productController.getProducts(),
       _getCategoriesCubit.getCategories(),
     ]);
   }
@@ -38,7 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // Light haptic feedback
     await HapticFeedback.lightImpact();
     await Future.wait([
-      _getHomeProductsCubit.refreshProducts(),
       _getCategoriesCubit.getCategories(),
     ]);
   }
@@ -47,9 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(
-          value: _getHomeProductsCubit,
-        ),
         BlocProvider.value(
           value: _getCategoriesCubit,
         ),
@@ -80,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _getHomeProductsCubit.close();
     _getCategoriesCubit.close();
     super.dispose();
   }
