@@ -13,7 +13,13 @@ ThemeData getThemeData(context) => ThemeData(
         onSecondary: AppColor.black,
         onSurface: AppColor.black,
       ),
-      dialogBackgroundColor: AppColor.white,
+      pageTransitionsTheme: PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
+        },
+      ),
+      // dialogBackgroundColor: AppColor.white,
       applyElevationOverlayColor: false,
       fontFamily: AppConst.APP_FONT,
       textTheme: Theme.of(context).textTheme.apply(
