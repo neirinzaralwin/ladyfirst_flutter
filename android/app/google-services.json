@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223897335964",
+    "project_id": "ladyfirst-64370",
+    "storage_bucket": "ladyfirst-64370.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223897335964:android:0064ac11458f8f0a4d1559",
+        "android_client_info": {
+          "package_name": "com.example.lady_first_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKDXBu89ntJu2g_TWmtL5fjtk1uSK1b38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

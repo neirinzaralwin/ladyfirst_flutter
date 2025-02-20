@@ -1,9 +1,9 @@
+import 'package:lady_first_flutter/core/network/api_client.dart';
 import 'package:lady_first_flutter/features/category/data/models/category.dart';
-import 'package:lady_first_flutter/features/category/service/category_service.dart';
 
 class CategoryRepository {
-  // ignore: unused_field
-  final CategoryService _categoryService = CategoryService();
+  final ApiClient apiClient;
+  CategoryRepository({required this.apiClient});
 
   Future<List<Category>> getCategories() async {
     // Mock data
