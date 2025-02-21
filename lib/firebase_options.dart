@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'ladyfirst-64370.firebasestorage.app',
     measurementId: 'G-8HVP7Z7D5W',
   );
+
 }
