@@ -1,0 +1,2 @@
+/Users/neirinzaralwin/Developer/thai/lady_first_flutter/android/app/.cxx/RelWithDebInfo/2b3p413r/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/neirinzaralwin/Developer/thai/lady_first_flutter/android/app/.cxx/RelWithDebInfo/2b3p413r/arm64-v8a/CMakeFiles/rebuild_cache.dir
