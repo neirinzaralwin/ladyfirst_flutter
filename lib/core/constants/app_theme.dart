@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'app_color.dart';
 import 'app_const.dart';
@@ -16,7 +17,7 @@ ThemeData getThemeData(context) => ThemeData(
   pageTransitionsTheme: PageTransitionsTheme(
     builders: {
       TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
-      TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
     },
   ),
   // dialogBackgroundColor: AppColor.white,
@@ -101,3 +102,28 @@ Color tintColor(Color color, double factor) =>
 
 Color shadeColor(Color color, double factor) =>
     Color.lerp(Colors.black, color, factor)!;
+
+class CustomCupertinoPageTransitionsBuilder extends PageTransitionsBuilder {
+  @override
+  final Duration transitionDuration;
+
+  CustomCupertinoPageTransitionsBuilder({
+    this.transitionDuration = const Duration(milliseconds: 500),
+  });
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return CupertinoPageTransition(
+      primaryRouteAnimation: animation,
+      secondaryRouteAnimation: secondaryAnimation,
+      linearTransition: false, // Enables smooth curve effect
+      child: child,
+    );
+  }
+}
