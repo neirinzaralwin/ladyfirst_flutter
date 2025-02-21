@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class ApiClient extends GetConnect implements GetxService {
   late String token;
@@ -16,7 +17,7 @@ class ApiClient extends GetConnect implements GetxService {
       'Content-type': 'application/json; charset=UTF-8',
       // 'Authorization': 'Bearer $token',
       "HttpHeaders.contentTypeHeader": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
     };
 
     // _formHeader = {'Authorization': 'Bearer $token', "Accept": "application/json"};
@@ -26,60 +27,66 @@ class ApiClient extends GetConnect implements GetxService {
       Response response = await get(uri, headers: _mainHeaders);
       return response;
     } catch (e) {
+      FirebaseCrashlytics.instance.log('getData failed for URI: $uri');
+      FirebaseCrashlytics.instance.recordError(e, StackTrace.current);
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
 
-  Future<Response> postData(
-    String uri,
-    dynamic body,
-  ) async {
+  Future<Response> postData(String uri, dynamic body) async {
     try {
       Response response = await post(uri, body, headers: _mainHeaders);
       return response;
     } catch (e) {
+      FirebaseCrashlytics.instance.log('postData failed for URI: $uri');
+      FirebaseCrashlytics.instance.recordError(e, StackTrace.current);
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
 
-  Future<Response> postFormData(
-    String uri,
-    dynamic body,
-  ) async {
+  Future<Response> postFormData(String uri, dynamic body) async {
     try {
-      Response response =
-          await post(uri, body, headers: {"Accept": "application/json"});
+      Response response = await post(
+        uri,
+        body,
+        headers: {"Accept": "application/json"},
+      );
       return response;
     } catch (e) {
+      FirebaseCrashlytics.instance.log('postFormData failed for URI: $uri');
+      FirebaseCrashlytics.instance.recordError(e, StackTrace.current);
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
 
-  Future<Response> postFormDataWithHeader(
-    String uri,
-    dynamic body,
-  ) async {
+  Future<Response> postFormDataWithHeader(String uri, dynamic body) async {
     try {
       Response response = await post(uri, body, headers: _formHeader);
       return response;
     } catch (e) {
+      FirebaseCrashlytics.instance.log(
+        'postFormDataWithHeader failed for URI: $uri',
+      );
+      FirebaseCrashlytics.instance.recordError(e, StackTrace.current);
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
 
-  Future<Response> deleteData(
-    String uri,
-  ) async {
+  Future<Response> deleteData(String uri) async {
     try {
       Response response = await delete(uri, headers: _mainHeaders);
       return response;
     } catch (e) {
+      FirebaseCrashlytics.instance.log('deleteData failed for URI: $uri');
+      FirebaseCrashlytics.instance.recordError(e, StackTrace.current);
       return Response(statusCode: 1, statusText: e.toString());
     }
   }
 
   Future<List<T>> getList<T>(
-      String uri, T Function(Map<String, dynamic>) fromJson) async {
+    String uri,
+    T Function(Map<String, dynamic>) fromJson,
+  ) async {
     try {
       Response response = await get(uri, headers: _mainHeaders);
       if (response.statusCode == 200) {
@@ -96,6 +103,8 @@ class ApiClient extends GetConnect implements GetxService {
       }
       throw Exception('Failed to fetch list data');
     } catch (e) {
+      FirebaseCrashlytics.instance.log('getList failed for URI: $uri');
+      FirebaseCrashlytics.instance.recordError(e, StackTrace.current);
       throw Exception('Error fetching list: ${e.toString()}');
     }
   }
@@ -105,7 +114,7 @@ class ApiClient extends GetConnect implements GetxService {
       'Content-type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
       "HttpHeaders.contentTypeHeader": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
     };
   }
 }
