@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/core/extensions/text_extensions.dart';
+import 'package:lady_first_flutter/features/auth/controllers/register_controller.dart';
 import 'package:lady_first_flutter/features/auth/presentation/register/widgets/register_header.dart';
 
 import 'widgets/register_form.dart';
@@ -13,6 +15,18 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  @override
+  void initState() {
+    Get.put(RegisterController());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.delete<RegisterController>();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

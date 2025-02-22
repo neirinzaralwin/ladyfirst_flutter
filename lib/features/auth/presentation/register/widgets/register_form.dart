@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/core/extensions/string_extensions.dart';
+import 'package:lady_first_flutter/features/auth/controllers/register_controller.dart';
 import 'package:lady_first_flutter/widgets/custom_textfield.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -12,11 +14,9 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  RegisterController get registerController => Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +47,8 @@ class _RegisterFormState extends State<RegisterForm> {
                     CustomTextFormField(
                       text: "first name".startCapitalize,
                       hint: "John",
-                      controller: _firstNameController,
-                      validator:
-                          (val) => checkNull(val, 'first name'.startCapitalize),
+                      controller: registerController.firstNameController,
+                      validator: null,
                       enabledBorderColor: AppColor.grey,
                       enableBorder: false,
                       focusBorderColor: AppColor.grey,
@@ -69,7 +68,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     CustomTextFormField(
                       text: "last name".startCapitalize,
                       hint: "Doe",
-                      controller: _lastNameController,
+                      controller: registerController.lastNameController,
                       validator: null,
                       enabledBorderColor: AppColor.grey,
                       enableBorder: false,
@@ -95,9 +94,9 @@ class _RegisterFormState extends State<RegisterForm> {
           CustomTextFormField(
             text: "phone number".startCapitalize,
             hint: "09 123456789",
-            controller: _phoneController,
+            controller: registerController.phoneController,
             isDigitOnly: true,
-            validator: (val) => checkNull(val, "phone number".startCapitalize),
+            validator: null,
             enabledBorderColor: AppColor.grey,
             enableBorder: false,
             focusBorderColor: AppColor.grey,
@@ -117,9 +116,9 @@ class _RegisterFormState extends State<RegisterForm> {
           CustomTextFormField(
             text: "password".startCapitalize,
             hint: "********",
-            controller: _passwordController,
+            controller: registerController.passwordController,
             isPassword: true,
-            validator: (val) => checkPassword(val, "password".startCapitalize),
+            validator: null,
             enabledBorderColor: AppColor.grey,
             enableBorder: false,
             focusBorderColor: AppColor.grey,
@@ -132,42 +131,18 @@ class _RegisterFormState extends State<RegisterForm> {
           SizedBox(
             width: double.maxFinite,
             height: 50.0,
-            child: ElevatedButton(
-              onPressed: _register,
-              child: Text("register".startCapitalize).bodyMedium.bold,
+            child: Obx(
+              () => ElevatedButton(
+                onPressed:
+                    registerController.isReady
+                        ? registerController.register
+                        : null,
+                child: Text("register".startCapitalize).bodyMedium.bold,
+              ),
             ),
           ),
         ],
       ),
     );
-  }
-
-  void _register() {
-    if (_formKey.currentState!.validate()) {
-      // Register user
-    }
-  }
-
-  String? checkNull(val, String text) {
-    if (val.isEmpty) return "$text cannot be empty";
-    return null;
-  }
-
-  String? checkPassword(val, String text) {
-    if (val.isEmpty) return "$text cannot be empty";
-    if (val.length < 6) return "$text must be at least 6 characters";
-    return null;
-  }
-
-  String? checkReEnterPassword(val) {
-    if (val.isEmpty) return "Re-enter password cannot be empty";
-    if (val != _passwordController.text) return "Passwords do not match";
-    return null;
-  }
-
-  String? checkEmail(val) {
-    if (val.isEmpty) return "Email cannot be empty";
-    if (!val.isEmail) return "Invalid email";
-    return null;
   }
 }
