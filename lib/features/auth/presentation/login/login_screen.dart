@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lady_first_flutter/core/constants/app_color.dart';
 import 'package:lady_first_flutter/core/constants/app_pages.dart';
 import 'package:lady_first_flutter/core/constants/routes.dart';
 import 'package:lady_first_flutter/core/dimension/screen_dimension.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/core/extensions/text_extensions.dart';
+import 'package:lady_first_flutter/features/auth/controllers/login_controller.dart';
 import 'widgets/login_form.dart';
 import 'widgets/login_header.dart';
 
@@ -16,6 +18,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    Get.put(LoginController());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.delete<LoginController>();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
