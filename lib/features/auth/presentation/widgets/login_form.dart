@@ -20,25 +20,36 @@ class _LoginFormState extends State<LoginForm> {
     return Form(
       key: _formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text("Phone").bodyMedium.greyColor,
+          ),
           CustomTextFormField(
             text: "phone".startCapitalize,
             hint: "+66 123456789",
             controller: _phoneController,
             validator: checkEmail,
-            enabledBorderColor: AppColor.mildGray,
+            enabledBorderColor: AppColor.grey,
+            enableBorder: false,
             focusBorderColor: AppColor.grey,
-            fillColor: AppColor.white,
+            fillColor: Colors.grey[200],
           ),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 5.0),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text("Password").bodyMedium.greyColor,
+          ),
           CustomTextFormField(
             text: "password".startCapitalize,
             hint: "********",
             controller: _passwordController,
             validator: (val) => checkPassword(val, "password"),
-            enabledBorderColor: AppColor.mildGray,
+            enabledBorderColor: AppColor.grey,
+            enableBorder: false,
             focusBorderColor: AppColor.grey,
-            fillColor: AppColor.white,
+            fillColor: Colors.grey[200],
             isPassword: true,
             iconColor: AppColor.grey,
           ),
