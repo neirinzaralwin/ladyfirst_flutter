@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text("Don't have an account?").bodyMedium.greyColor,
                   const SizedBox(width: 5.0),
                   GestureDetector(
-                    onTap: () => AppPages.router.pushNamed(Routes.register),
+                    onTap: () => AppPages.router.pushNamed(Routes.terms),
                     child: const Text("Sign up").bodyMedium.bold.primaryColor,
                   ),
                 ],

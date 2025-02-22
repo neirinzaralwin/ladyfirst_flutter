@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lady_first_flutter/features/auth/presentation/login/login_screen.dart';
 import 'package:lady_first_flutter/features/auth/presentation/register/register_screen.dart';
+import 'package:lady_first_flutter/features/auth/presentation/terms/terms_screen.dart';
 import 'package:lady_first_flutter/features/cart/cart_screen.dart';
 import 'package:lady_first_flutter/features/checkout/checkout_screen.dart';
 import 'package:lady_first_flutter/features/checkout/order_place_screen.dart';
@@ -70,12 +71,21 @@ class AppPages {
             (BuildContext context, GoRouterState state) => const LoginScreen(),
       ),
       GoRoute(
-        name: Routes.register,
-        path: "/${Routes.register}",
+        name: Routes.terms,
+        path: "/${Routes.terms}",
         builder:
-            (BuildContext context, GoRouterState state) =>
-                const RegisterScreen(),
+            (BuildContext context, GoRouterState state) => const TermsScreen(),
+        routes: [
+          GoRoute(
+            name: Routes.register,
+            path: Routes.register,
+            builder:
+                (BuildContext context, GoRouterState state) =>
+                    const RegisterScreen(),
+          ),
+        ],
       ),
+
       GoRoute(
         name: Routes.favorite,
         path: "/${Routes.favorite}",

@@ -125,9 +125,7 @@ class _RegisterFormState extends State<RegisterForm> {
             iconColor: AppColor.grey,
             fillColor: Colors.grey[200],
           ),
-          const SizedBox(height: 5.0),
-
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 25.0),
           SizedBox(
             width: double.maxFinite,
             height: 50.0,

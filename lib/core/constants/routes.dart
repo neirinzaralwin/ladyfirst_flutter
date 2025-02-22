@@ -3,6 +3,7 @@ class Routes {
 
   // auth
   static const String login = "login";
+  static const String terms = "terms";
   static const String register = "register";
 
   // favourite
