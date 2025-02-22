@@ -5,7 +5,7 @@ import 'package:lady_first_flutter/core/constants/routes.dart';
 import 'package:lady_first_flutter/core/dimension/screen_dimension.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/core/extensions/text_extensions.dart';
-import '../widgets/login_form.dart';
+import 'widgets/login_form.dart';
 import 'widgets/login_header.dart';
 
 class LoginScreen extends StatefulWidget {

@@ -28,7 +28,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           CustomTextFormField(
             text: "phone".startCapitalize,
-            hint: "+66 123456789",
+            hint: "09 123456789",
             controller: _phoneController,
             validator: checkEmail,
             enabledBorderColor: AppColor.grey,

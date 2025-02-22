@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lady_first_flutter/features/auth/presentation/login/login_screen.dart';
-import 'package:lady_first_flutter/features/auth/presentation/register_screen.dart';
+import 'package:lady_first_flutter/features/auth/presentation/register/register_screen.dart';
 import 'package:lady_first_flutter/features/cart/cart_screen.dart';
 import 'package:lady_first_flutter/features/checkout/checkout_screen.dart';
 import 'package:lady_first_flutter/features/checkout/order_place_screen.dart';
