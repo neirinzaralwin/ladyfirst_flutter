@@ -5,7 +5,8 @@ class AppConst {
   static const APP_NAME_SHORT = "lady first";
   static const APP_VERSION = "1.0.0";
   static const APP_FONT = "sfpro";
-  static const IOS_CLIENT_ID = "";
+  static const IOS_CLIENT_ID =
+      "223897335964-6n8ae2shllihk8lbjodn2kc1n1ltqr6l.apps.googleusercontent.com";
   static const DEBUGGING_MODE = true;
 
   // url

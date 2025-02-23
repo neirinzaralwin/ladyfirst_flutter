@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '223897335964',
     projectId: 'ladyfirst-64370',
     storageBucket: 'ladyfirst-64370.firebasestorage.app',
+    androidClientId: '223897335964-ntvkb0dvemh7nq4je5hmp4rfuu4p3qe6.apps.googleusercontent.com',
+    iosClientId: '223897335964-6n8ae2shllihk8lbjodn2kc1n1ltqr6l.apps.googleusercontent.com',
     iosBundleId: 'com.example.ladyFirstFlutter',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '223897335964',
     projectId: 'ladyfirst-64370',
     storageBucket: 'ladyfirst-64370.firebasestorage.app',
+    androidClientId: '223897335964-ntvkb0dvemh7nq4je5hmp4rfuu4p3qe6.apps.googleusercontent.com',
+    iosClientId: '223897335964-6n8ae2shllihk8lbjodn2kc1n1ltqr6l.apps.googleusercontent.com',
     iosBundleId: 'com.example.ladyFirstFlutter',
   );
 

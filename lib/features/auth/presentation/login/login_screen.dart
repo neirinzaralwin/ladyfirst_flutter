@@ -18,11 +18,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  @override
-  void initState() {
-    Get.put(LoginController());
-    super.initState();
-  }
+  final loginController = Get.put(LoginController());
 
   @override
   void dispose() {
@@ -32,39 +28,45 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => AppPages.router.pop(),
-            icon: const Icon(Icons.arrow_back),
-          ),
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              const LoginHeader(),
-              const LoginForm(),
-              const SizedBox(height: 20.0),
-              _buildDivider(),
-              const SizedBox(height: 20.0),
-              _buildSocialLogins(),
-              const SizedBox(height: 50.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return Obx(
+      () => LoadingOverlay(
+        isLoading: loginController.isLoading,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () => AppPages.router.pop(),
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
                 children: [
-                  const Text("Don't have an account?").bodyMedium.greyColor,
-                  const SizedBox(width: 5.0),
-                  GestureDetector(
-                    onTap: () => AppPages.router.pushNamed(Routes.terms),
-                    child: const Text("Sign up").bodyMedium.bold.primaryColor,
+                  const LoginHeader(),
+                  const LoginForm(),
+                  const SizedBox(height: 20.0),
+                  _buildDivider(),
+                  const SizedBox(height: 20.0),
+                  _buildSocialLogins(),
+                  const SizedBox(height: 50.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Don't have an account?").bodyMedium.greyColor,
+                      const SizedBox(width: 5.0),
+                      GestureDetector(
+                        onTap: () => AppPages.router.pushNamed(Routes.terms),
+                        child:
+                            const Text("Sign up").bodyMedium.bold.primaryColor,
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 50.0),
                 ],
               ),
-              const SizedBox(height: 50.0),
-            ],
+            ),
           ),
         ),
       ),
@@ -74,23 +76,26 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildSocialLogins() {
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.all(14.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            border: Border.all(color: AppColor.mildGray),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/icons/google_icon.png",
-                width: 20.0,
-                height: 20.0,
-              ),
-              const SizedBox(width: 10.0),
-              const Text("Continue with google").bodyMedium,
-            ],
+        InkWell(
+          onTap: () => loginController.loginWithGoogle(),
+          child: Container(
+            padding: EdgeInsets.all(14.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              border: Border.all(color: AppColor.mildGray),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/icons/google_icon.png",
+                  width: 20.0,
+                  height: 20.0,
+                ),
+                const SizedBox(width: 10.0),
+                const Text("Continue with google").bodyMedium,
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 10.0),
@@ -132,6 +137,35 @@ class _LoginScreenState extends State<LoginScreen> {
         const Text("or").capitalized.bodySmall.greyColor,
         const SizedBox(width: 10.0),
         divider,
+      ],
+    );
+  }
+}
+
+class LoadingOverlay extends StatelessWidget {
+  final bool isLoading;
+  final Widget child;
+
+  const LoadingOverlay({
+    super.key,
+    required this.isLoading,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        child,
+        if (isLoading)
+          Container(
+            color: Colors.black.withValues(alpha: 0.5),
+            child: const Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            ),
+          ),
       ],
     );
   }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lady_first_flutter/core/services/google_service.dart';
 
 class LoginController extends GetxController {
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  final _isLoading = false.obs;
+  bool get isLoading => _isLoading.value;
 
   final _isPhoneNotEmpty = false.obs;
   bool get isPhoneNotEmpty => _isPhoneNotEmpty.value;
@@ -47,6 +51,23 @@ class LoginController extends GetxController {
     debugPrint(
       'Login with: ${phoneController.text} / ${passwordController.text}',
     );
+  }
+
+  void loginWithGoogle() async {
+    try {
+      _isLoading(true);
+      await GoogleSignInService.signInWithGoogle();
+    } catch (e) {
+      debugPrint("Error in login with google: $e");
+      Get.showSnackbar(
+        GetSnackBar(
+          message: e.toString(),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    } finally {
+      _isLoading(false);
+    }
   }
 
   @override
