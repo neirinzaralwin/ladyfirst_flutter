@@ -36,6 +36,7 @@ dependencies:
   # translation and localization
   intl: ^0.20.0
   custom_refresh_indicator: ^4.0.1
+  dropdown_button2: ^2.3.9
   # rename
   rename_app: ^1.6.2
   # notification

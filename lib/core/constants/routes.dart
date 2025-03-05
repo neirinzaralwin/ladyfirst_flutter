@@ -5,6 +5,7 @@ class Routes {
   static const String login = "login";
   static const String terms = "terms";
   static const String register = "register";
+  static const String registerAddress = "register-address";
 
   // favourite
   static const String favorite = "favorite";

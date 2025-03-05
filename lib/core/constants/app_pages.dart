@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lady_first_flutter/features/auth/presentation/login/login_screen.dart';
+import 'package:lady_first_flutter/features/auth/presentation/register/register_address_screen.dart';
 import 'package:lady_first_flutter/features/auth/presentation/register/register_screen.dart';
 import 'package:lady_first_flutter/features/auth/presentation/terms/terms_screen.dart';
 import 'package:lady_first_flutter/features/cart/cart_screen.dart';
@@ -82,6 +83,15 @@ class AppPages {
             builder:
                 (BuildContext context, GoRouterState state) =>
                     const RegisterScreen(),
+            routes: [
+              GoRoute(
+                name: Routes.registerAddress,
+                path: Routes.registerAddress,
+                builder:
+                    (BuildContext context, GoRouterState state) =>
+                        const RegisterAddressScreen(),
+              ),
+            ],
           ),
         ],
       ),

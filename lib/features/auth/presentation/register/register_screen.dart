@@ -46,7 +46,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const RegisterHeader(),
+              const RegisterHeader(
+                title: "Register",
+                subTitle: "Create an account to do shopping.",
+              ),
               const RegisterForm(),
               Row(
                 children: [
