@@ -4,30 +4,12 @@ import 'package:lady_first_flutter/core/constants/app_pages.dart';
 import 'package:lady_first_flutter/core/constants/routes.dart';
 
 class RegisterController extends GetxController {
+  // Register properties
+
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
-
-  final cities = ['Hanoi', 'HCMC', 'Danang', 'Hue', 'Hai Phong'];
-  final _selectedCity = Rxn<String>();
-  String? get selectedCity => _selectedCity.value;
-  set selectedCity(String? value) => _selectedCity.value = value;
-
-  final countries = ['Myanmar', 'Thailand'];
-  final _selectedCountry = Rxn<String>();
-  String? get selectedCountry => _selectedCountry.value;
-  set selectedCountry(String? value) => _selectedCountry.value = value;
-
-  final provinces = ['Bangkok'];
-  final _selectedProvince = Rxn<String>();
-  String? get selectedProvince => _selectedProvince.value;
-  set selectedProvince(String? value) => _selectedProvince.value = value;
-
-  final addressController = TextEditingController();
-
-  final _isAddressReady = false.obs;
-  bool get isAddressReady => _isAddressReady.value;
 
   final _isReady = false.obs;
   bool get isReady => _isReady.value;
@@ -38,7 +20,6 @@ class RegisterController extends GetxController {
     firstNameController.addListener(_updateReadyState);
     phoneController.addListener(_updateReadyState);
     passwordController.addListener(_updateReadyState);
-
     _selectedCountry.listen((_) => _updateAddressReadyState());
     _selectedCity.listen((_) => _updateAddressReadyState());
     _selectedProvince.listen((_) => _updateAddressReadyState());
@@ -61,9 +42,33 @@ class RegisterController extends GetxController {
     return true;
   }
 
-  void register() {
-    AppPages.router.pushNamed(Routes.registerAddress);
-  }
+  // Register address properties
+  final _isRegisterLoading = false.obs;
+  bool get isRegisterLoading => _isRegisterLoading.value;
+  set isRegisterLoading(bool value) => _isRegisterLoading.value = value;
+
+  final cities = ['Hanoi', 'HCMC', 'Danang', 'Hue', 'Hai Phong'];
+  final _selectedCity = Rxn<String>();
+  String? get selectedCity => _selectedCity.value;
+  set selectedCity(String? value) => _selectedCity.value = value;
+
+  final countries = ['Myanmar', 'Thailand'];
+  final _selectedCountry = Rxn<String>();
+  String? get selectedCountry => _selectedCountry.value;
+  set selectedCountry(String? value) => _selectedCountry.value = value;
+
+  final provinces = ['Bangkok'];
+  final _selectedProvince = Rxn<String>();
+  String? get selectedProvince => _selectedProvince.value;
+  set selectedProvince(String? value) => _selectedProvince.value = value;
+
+  final addressController = TextEditingController();
+
+  final _isAddressReady = false.obs;
+  bool get isAddressReady => _isAddressReady.value;
+
+  void goToRegisterAddress() =>
+      AppPages.router.pushNamed(Routes.registerAddress);
 
   void _updateAddressReadyState() {
     _isAddressReady.value =
@@ -73,12 +78,23 @@ class RegisterController extends GetxController {
         addressController.text.isNotEmpty;
   }
 
+  void register() async {
+    isRegisterLoading = true;
+    Future.delayed(const Duration(seconds: 2), () {
+      isRegisterLoading = false;
+      AppPages.router.pop();
+      AppPages.router.pop();
+      AppPages.router.pop();
+    });
+  }
+
   @override
   void onClose() {
     firstNameController.dispose();
     lastNameController.dispose();
     phoneController.dispose();
     passwordController.dispose();
+    addressController.dispose();
     selectedCity = null;
     selectedCountry = null;
     selectedProvince = null;

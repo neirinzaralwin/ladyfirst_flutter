@@ -133,7 +133,7 @@ class _RegisterFormState extends State<RegisterForm> {
               () => ElevatedButton(
                 onPressed:
                     registerController.isReady
-                        ? registerController.register
+                        ? registerController.goToRegisterAddress
                         : null,
                 child: Text("register".startCapitalize).bodyMedium.bold,
               ),
