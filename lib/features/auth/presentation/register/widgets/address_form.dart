@@ -4,6 +4,7 @@ import 'package:lady_first_flutter/core/constants/app_color.dart';
 import 'package:lady_first_flutter/core/extensions/app_font.dart';
 import 'package:lady_first_flutter/core/extensions/string_extensions.dart';
 import 'package:lady_first_flutter/features/auth/controllers/register_controller.dart';
+import 'package:lady_first_flutter/features/auth/presentation/register/register_loading_screen.dart';
 import 'package:lady_first_flutter/widgets/custom_textfield.dart';
 
 class AddressForm extends StatefulWidget {
@@ -171,7 +172,17 @@ class _AddressFormState extends State<AddressForm> {
               width: double.maxFinite,
               height: 50.0,
               child: ElevatedButton(
-                onPressed: registerController.isAddressReady ? () {} : null,
+                onPressed:
+                    registerController.isAddressReady
+                        ? () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => const RegisterLoadingScreen(),
+                            ),
+                          );
+                        }
+                        : null,
                 child: Text("done".startCapitalize).bodyMedium.bold,
               ),
             ),
